@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: Project for ci/cd tools for custodian application
+    openshift.io/display-name:  Custodian CI/CD
+  name: custodian-cicd

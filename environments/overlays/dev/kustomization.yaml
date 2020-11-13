@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: custodian-dev
+
+bases:
+  - ../../../manifests/app/custodian/base/
+
+resources:
+  - namespace.yaml
+
+patchesStrategicMerge:
+  - patch-cron.yaml

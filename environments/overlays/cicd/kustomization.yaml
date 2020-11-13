@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: custodian-cicd
+
+bases:
+#  # Nexus
+#  - https://github.com/redhat-canada-gitops/catalog/nexus2/base
+  # Sonarqube
+#  - https://github.com/redhat-canada-gitops/catalog/sonarqube8/overlays/plugins
+
+# Pipeline
+  - https://github.com/85matthew/custodian-policies/.tekton/overlays/pipeline
+
+resources:
+  - namespace.yaml

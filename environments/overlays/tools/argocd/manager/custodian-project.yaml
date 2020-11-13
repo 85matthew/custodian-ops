@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: apps-custodian
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: 'argocd'
+      server: '*'
+    - namespace: 'custodian-dev'
+      server: '*'
+    - namespace: 'custodian-test'
+      server: '*'
+    - namespace: 'custodian-prod'
+      server: '*'
+    - namespace: 'custodian-monitor'
+      server: '*'
+  namespaceResourceBlacklist:
+    - group: ''
+      kind: ResourceQuota
+    - group: ''
+      kind: LimitRange
+    - group: 'networking.k8s.io'
+      kind: NetworkPolicy
+  sourceRepos:
+    - '*'
+  roles:
+    - description: Users with admin to applications in project
+      name: users
+      policies:
+        - p, role:user, applications, *, *, allow
+        - p, role:user, projects, get, *, allow
+  sourceRepos:
+    - '*'

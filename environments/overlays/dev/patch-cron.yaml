@@ -1,0 +1,12 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: custodian-cron
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: custodian-cron
+              image: quay.io/85matthew/custodian:latest
