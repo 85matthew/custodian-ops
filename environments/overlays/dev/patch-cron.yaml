@@ -10,3 +10,4 @@ spec:
           containers:
             - name: custodian-cron
               image: quay.io/85matthew/custodian:latest
+  schedule: '0 18 1 12 *'
