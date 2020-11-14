@@ -10,7 +10,7 @@ spec:
   source:
     path: cluster/overlays/BOGUS/pipeline
     repoURL: https://github.com/85matthew/custodian-ops.git
-    targetRevision: master
+    targetRevision: main
   syncPolicy:
     automated:
       prune: false
