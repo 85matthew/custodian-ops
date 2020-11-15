@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: argocd
 
+bases:
+  - ../../../../environments/overlays/cicd
+
 resources:
   - sealed-quaysecret.yml
   - sealed-githubsecret.yml
