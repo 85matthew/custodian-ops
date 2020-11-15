@@ -9,6 +9,8 @@ spec:
   destinations:
     - namespace: 'argocd'
       server: '*'
+    - namespace: 'custodian-cicd'
+      server: '*'
     - namespace: 'custodian-dev'
       server: '*'
     - namespace: 'custodian-test'
