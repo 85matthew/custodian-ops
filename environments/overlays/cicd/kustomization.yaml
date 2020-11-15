@@ -10,7 +10,15 @@ bases:
 #  - https://github.com/redhat-canada-gitops/catalog/sonarqube8/overlays/plugins
 
 # Pipeline
-  - https://github.com/85matthew/custodian-policies/.tekton/overlays/pipeline
 
+#  - https://github.com/85matthew/custodian-policies/.tekton/overlays/pipeline
+  - https://github.com/85matthew/pipeline-catalog/packaged/custodian-pipeline-with-hook/base/?ref=iterate-on-pipeline-catalog
 resources:
   - namespace.yaml
+
+patches:
+  - path: patch-container-repo.yaml
+    target:
+      kind: TriggerTemplate
+      name: triggertemplate
+      version: triggers.tekton.dev/v1alpha1

@@ -1,8 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: argocd
-
 bases:
   - ../../../../environments/overlays/cicd
 
@@ -10,3 +8,9 @@ resources:
   - sealed-quaysecret.yml
   - sealed-githubsecret.yml
 
+patches:
+  - path: patch-aws-iam-role.yaml
+    target:
+      kind: ServiceAccount
+      name: pipeline
+      version: v1
