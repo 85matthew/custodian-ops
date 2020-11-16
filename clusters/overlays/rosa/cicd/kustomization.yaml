@@ -5,8 +5,8 @@ bases:
   - ../../../../environments/overlays/cicd
 
 resources:
-  - sealed-quaysecret.yml
-  - sealed-githubsecret.yml
+  - sealed-quaysecret.yaml
+  - sealed-githubsecret.yaml
 
 patches:
   - path: patch-aws-iam-role.yaml
