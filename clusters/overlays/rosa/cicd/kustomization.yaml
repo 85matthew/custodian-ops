@@ -6,7 +6,7 @@ bases:
 
 resources:
   - sealed-quaysecret.yaml
-  - sealed-githubsecret.yaml
+  - sealed-github-secret.yaml
 
 patches:
   - path: patch-aws-iam-role.yaml
