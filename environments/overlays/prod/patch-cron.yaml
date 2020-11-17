@@ -9,4 +9,4 @@ spec:
         spec:
           containers:
             - name: custodian-cron
-              image: quay.io/85matthew/custodian:520223e
+              image: quay.io/85matthew/custodian:c146331
