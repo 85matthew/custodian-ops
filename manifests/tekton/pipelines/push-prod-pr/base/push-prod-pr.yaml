@@ -1,0 +1,101 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: push-prod-pr
+spec:
+  workspaces:
+    - name: git-source
+  params:
+    - name: git_revision
+      type: string
+      default: main
+    - name: git_url
+      type: string
+      default: https://github.com/85matthew/custodian-policies
+    - name: image_dest_url
+      type: string
+      description: External registry location of image to push without tag
+    - name: image_dest_tag
+      type: string
+      description: Tag of image to push to production
+    - name: cluster
+      type: string
+      description: Cluster to push to
+    - name: app
+      type: string
+      description: Either 'server' or 'client'
+  tasks:
+    - name: clone
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      workspaces:
+        - name: output
+          workspace: git-source
+      params:
+        - name: url
+          value: "$(params.git_url)"
+        - name: revision
+          value: "$(params.git_revision)"
+        - name: deleteExisting
+          value: "true"
+    - name: branch
+      taskRef:
+        name: git
+        kind: ClusterTask
+      runAfter:
+        - clone
+      workspaces:
+        - name: source
+          workspace: git-source
+      params:
+        - name: commands
+          value: |
+            git checkout -b push-$(params.image_dest_tag)
+    - name: patch
+      taskRef:
+        name: yq
+        kind: ClusterTask
+      runAfter:
+        - branch
+      workspaces:
+        - name: source
+          workspace: git-source
+      params:
+        - name: commands
+          value: |
+            yq w -i clusters/overlays/$(params.cluster)/prod/patch-$(params.app)-deployment.yaml [0].value $(params.image_dest_url):$(params.image_dest_tag)
+    - name: commit
+      taskRef:
+        name: git
+        kind: ClusterTask
+      runAfter:
+        - patch
+      workspaces:
+        - name: source
+          workspace: git-source
+      params:
+        - name: commands
+          value: |
+            git status
+            cat ~/.gitconfig
+            git config --global user.email "pipeline@redhat.com"
+            git add -u
+            git commit -m 'Pushing image $(params.image_dest_url):$(params.image_dest_tag) to production'
+    - name: prod-pr-deploy
+      taskRef:
+        name: task-create-pr
+        kind: ClusterTask
+      runAfter:
+        - commit
+      workspaces:
+        - name: source
+          workspace: git-source
+      params:
+        - name: title
+          value: Update image to $(params.image_dest_tag)
+        - name: body
+          value: |-
+            Please review the following links before accepting the PR:
+            Image Vulnerabilities: https://$(params.image_dest_url):$(params.image_dest_tag)
+            Sonarqube Results: http://sonarqube-product-catalog-cicd.apps.$(params.cluster).ocplab.com/dashboard?id=product-catalog-$(params.app)
