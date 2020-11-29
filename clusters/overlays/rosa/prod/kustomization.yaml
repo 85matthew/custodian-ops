@@ -3,3 +3,6 @@ kind: Kustomization
 
 bases:
   - ../../../../environments/overlays/prod
+
+resources:
+  - serviceaccount.yaml
