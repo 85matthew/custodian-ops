@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: Project for monitoring tools of cloud custodian application
+    openshift.io/display-name:  Cloud Custodian Monitor
+  name: custodian-monitor

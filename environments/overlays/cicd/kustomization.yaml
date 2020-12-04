@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: custodian-cicd
 
 bases:
+#  - ../../../manifests/tekton/pipelines/push-prod-pr/base/
 #  # Nexus
 #  - https://github.com/redhat-canada-gitops/catalog/nexus2/base
   # Sonarqube
