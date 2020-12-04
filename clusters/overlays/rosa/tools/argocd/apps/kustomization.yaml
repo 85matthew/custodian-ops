@@ -33,9 +33,9 @@ patchesJson6902:
       name: custodian-cicd
     path: patch-cicd-app.yaml
 
-#  - target:
-#      group: argoproj.io
-#      version: v1alpha1
-#      kind: Application
-#      name: custodian-monitor
-#    path: patch-monitor-app.yaml
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: custodian-monitor
+    path: patch-monitor-app.yaml
