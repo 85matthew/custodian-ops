@@ -7,8 +7,8 @@ commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 
 bases:
-  - github.com/85matthew/catalog/grafana-operator/base/operator
-  - github.com/85matthew/catalog/grafana-operator/base/instance
+#  - github.com/85matthew/catalog/grafana-operator/base/operator
+#  - github.com/85matthew/catalog/grafana-operator/base/instance
   - ../../../manifests/app/monitor/base
 
 resources:
