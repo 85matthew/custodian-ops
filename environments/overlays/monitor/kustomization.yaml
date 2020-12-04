@@ -7,7 +7,7 @@ commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 
 bases:
-#  - https://github.com/85matthew/catalog/grafana-operator/overlays/aggregate
+  - https://github.com/85matthew/catalog/grafana-operator/base/
   - ../../../manifests/app/monitor/base
 
 resources:
