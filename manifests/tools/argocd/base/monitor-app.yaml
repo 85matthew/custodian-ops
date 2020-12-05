@@ -24,3 +24,7 @@ spec:
       kind: Route
       jsonPointers:
         - /status/ingress
+    - group: apps
+      kind: GrafanaDataSource
+      jsonPointers:
+        - /spec/datasources/0/secureJsonData/httpHeaderValue1
