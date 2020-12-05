@@ -16,11 +16,3 @@ resources:
 #  - operator-group.yaml
   - cluster-monitor-view-rb.yaml
 #  - grafana-proxy-rb.yaml
-
-patchesJson6902:
-  - target:
-      version: v1
-      group: rbac.authorization.k8s.io
-      kind: ClusterRoleBinding
-      name: grafana-proxy
-    path: patch-proxy-namespace.yaml
