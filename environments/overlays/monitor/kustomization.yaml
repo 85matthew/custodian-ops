@@ -12,7 +12,7 @@ bases:
   - ../../../manifests/app/monitor/base
 
 resources:
-  - namespace.yaml
+#  - namespace.yaml
 #  - operator-group.yaml
-  - cluster-monitor-view-rb.yaml
+#  - cluster-monitor-view-rb.yaml
 #  - grafana-proxy-rb.yaml
