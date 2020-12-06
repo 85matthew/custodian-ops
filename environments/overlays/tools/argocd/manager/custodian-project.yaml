@@ -17,7 +17,7 @@ spec:
       server: '*'
     - namespace: 'custodian-prod'
       server: '*'
-    - namespace: 'custodian-monitor'
+    - namespace: 'grafana'
       server: '*'
   namespaceResourceBlacklist:
     - group: ''
